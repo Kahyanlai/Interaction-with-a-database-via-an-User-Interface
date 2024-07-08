@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Customer Details</title>
+    <script>
+        function validation() {
+            var Valid = true;
+
+            // Email validation
+            var email = document.getElementById("txtEmail").value;
+            var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailMessage").innerHTML = "<em>Please provide your email address in 'xxx@mail.com' format</em>";
+                document.getElementById("emailMessage").classList.add("text-danger");
+                Valid = false;
+            } else {
+                document.getElementById("emailMessage").innerHTML = "Valid";
+                document.getElementById("emailMessage").classList.remove("text-danger");
+                document.getElementById("emailMessage").classList.add("text-success");
+            }
+
+            // Name validation
+            if (document.getElementById("txtName").value.length == 0) {
+                document.getElementById("nameMessage").innerHTML = "<em>You did not enter your name</em>";
+                document.getElementById("nameMessage").classList.add("text-danger");
+                Valid = false;
+            } else {
+                document.getElementById("nameMessage").innerHTML = "Valid";
+                document.getElementById("nameMessage").classList.remove("text-danger");
+                document.getElementById("nameMessage").classList.add("text-success");
+            }
+
+            // Phone number validation
+            var phoneNumber = document.getElementById("txtPhone").value;
+            var phoneNumberPattern = /^[0-9]{10}$/;
+
+            if (!phoneNumberPattern.test(phoneNumber)) {
+                var nonDigitCharPattern = /[^0-9]/;
+                var nonDigitMatch = phoneNumber.match(nonDigitCharPattern);
+
+                if (nonDigitMatch) {
+                    document.getElementById("phoneNumberMessage").innerHTML = "<em>Phone number contains an invalid character</em>";
+                } else if (phoneNumber.length > 10) {
+                    document.getElementById("phoneNumberMessage").innerHTML = "<em>Phone number must not exceed 10 digits</em>";
+                } else {
+                    document.getElementById("phoneNumberMessage").innerHTML = "<em>Please enter your phone number</em>";
+                }
+                document.getElementById("phoneNumberMessage").classList.add("text-danger");
+                Valid = false;
+            } else {
+                document.getElementById("phoneNumberMessage").innerHTML = "Valid";
+                document.getElementById("phoneNumberMessage").classList.remove("text-danger");
+                document.getElementById("phoneNumberMessage").classList.add("text-success");
+            }
+
+            // Address validation
+            var address = document.getElementById("txtAddress").value;
+            var addressPattern = /^[a-zA-Z0-9\s,.'-]{3,}$/;
+
+            if (!addressPattern.test(address)) {
+                document.getElementById("addressMessage").innerHTML = "<em>Please enter your address</em>";
+                document.getElementById("addressMessage").classList.add("text-danger");
+                Valid = false;
+            } else {
+                document.getElementById("addressMessage").innerHTML = "Valid";
+                document.getElementById("addressMessage").classList.remove("text-danger");
+                document.getElementById("addressMessage").classList.add("text-success");
+            }
+
+            return Valid;
+        }
+    </script>
+    <style>
+      .text-danger {
+      color: red; }
+      .text-success {
+      color: green; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid bg-info-subtle mb-4">
+            <div class="col-sm-8 mx-auto text-center py-2">
+                <h1 class="display-4">Customer Details Form</h1>
+                <p class="lead">Please fill in the form below to provide your details.</p>
+            </div>
+        </div>
+    </header>
+    <fieldset>
+        <form name="frmCustomer" class="needs-validation mx-4" method="post" action="contact.php" onsubmit="return validation()">
+            <p>
+                <label for="txtName">Name</label>
+                <input type="text" class="form-control" name="txtName" id="txtName" placeholder="Name" value="">
+                <span id="nameMessage"></span>
+            </p>
+            <p>
+                <label for="txtPhone">Phone</label>
+                <input type="tel" class="form-control" name="txtPhone" id="txtPhone" placeholder="+61 xxxx xxx xxx" value="" autocomplete="tel">
+                <span id="phoneNumberMessage"></span>
+            </p>
+            <p>
+                <label for="txtEmail">Email</label>
+                <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Email" value="" autocomplete="email">
+                <span id="emailMessage"></span>
+            </p>
+            <p>
+                <label for="txtAddress">Address</label>
+                <input type="text" name="txtAddress" class="form-control" id="txtAddress" placeholder="1234 Main St" autocomplete="address-line1">
+                <span id="addressMessage"></span>
+            </p>
+            <p>&nbsp;</p>
+            <p>
+                <input type="submit" name="Submit" id="Submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+            </p>
+        </form>
+    </fieldset>
+
+    <footer class="container-fluid bg-dark text-white py-2">
+        <div class="container">
+            <p class="text-center fw-light">&copy; 2024</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+
+</html>
